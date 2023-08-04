@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('glsap', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('niksap')->unique();
-            $table->string('role');
-            $table->string('jabatan');
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('glsap');
+            $table->string('costcenter', 100);
+            $table->string('namarekening', 255);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('glsap');
     }
 };
