@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('ppab', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('niksap')->unique();
-            $table->string('role');
-            $table->string('jabatan');
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedBigInteger('glsap_id');
+            $table->string('jenis_pekerjaan', 255);
             $table->timestamps();
+
+            $table->foreign('glsap_id')->references('id')->on('glsap')->onDelete('cascade');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('ppab');
     }
 };
