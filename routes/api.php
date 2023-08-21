@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\GlsapController;
+// use App\Http\Controllers\Api\AuthController;
 use App\Models\Glsap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PpabController;
+use App\Http\Controllers\GlsapController;
+// use App\Http\Controllers\Api\GlsapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +31,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::apiResource('glsap', GlsapController::class);
+    Route::apiResource('ppab', PpabController::class);
+    Route::get('selectglsap', [GlsapController::class, 'selectGlsap']);
 });

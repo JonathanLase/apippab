@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\GlsapResource;
+use App\Http\Resources\ResponseResource;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -22,7 +22,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return new GlsapResource(400, 'NOT OK', "there's something wrong", $validator->errors());
+            return new ResponseResource(400, 'NOT OK', "there's something wrong", $validator->errors());
         }
 
         $input = $request->all();
@@ -36,7 +36,7 @@ class AuthController extends Controller
             'jabatan' => $user->jabatan
         ];
 
-        return new GlsapResource(200, 'OK', 'Registration Success', $data);
+        return new ResponseResource(200, 'OK', 'Registration Success', $data);
     }
 
     public function login(Request $request)
@@ -60,27 +60,27 @@ class AuthController extends Controller
                 'nama' => $auth->nama
             ];
 
-            return new GlsapResource(200, 'OK', 'Login Successfull', $data);
+            return new ResponseResource(200, 'OK', 'Login Successfull', $data);
         } else {
-            return new GlsapResource(400, 'NOT OK', 'Login Failed', null);
+            return new ResponseResource(400, 'NOT OK', 'Login Failed', null);
         }
 
         // $user = User::where('niksap', $request->niksap)->first();
 
         // if (!$user || !Hash::check($request->password, $user->password)) {
-        //     return new GlsapResource(400, 'NOT OK', 'Niksap or Password are incorrect', null);
+        //     return new ResponseResource(400, 'NOT OK', 'Niksap or Password are incorrect', null);
         // } else {
         //     $token = [
         //         'token' => $user->createToken($request->niksap)->plainTextToken,
         //         'nama' => $user->nama
         //     ];
-        //     return new GlsapResource(200, 'OK', 'Login Successfull', $token);
+        //     return new ResponseResource(200, 'OK', 'Login Successfull', $token);
         // }
     }
 
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
-        return new GlsapResource(200, 'OK', 'Logout Successfully', null);
+        return new ResponseResource(200, 'OK', 'Logout Successfully', null);
     }
 }

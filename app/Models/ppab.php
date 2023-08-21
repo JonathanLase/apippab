@@ -12,6 +12,7 @@ class ppab extends Model
 
     protected $table = 'ppab';
     protected $fillable = ['glsap_id', 'jenis_pekerjaan'];
+    protected $with = ['glsap'];
 
     public function glsap(): BelongsTo
     {
